@@ -194,6 +194,8 @@ in
       };
     };
     hop.enable = true;
+    toggleterm.enable = true;
+    lsp-status.enable = true;
   };
 
   opts = {
@@ -205,6 +207,31 @@ in
   globals.mapleader = " ";
 
   keymaps = [
+    {
+      action  = ''<cmd>61ToggleTerm direction=float name="Terminal 1"<CR>'';
+      key = "<M-1>";
+      mode = ["n" "v" "t" "i"];
+    }
+    {
+      action  = ''<cmd>62ToggleTerm direction=float name="Terminal 2"<CR>'';
+      key = "<M-2>";
+      mode = ["n" "v" "t" "i"];
+    }
+    {
+      action  = ''<cmd>63ToggleTerm direction=float name="Terminal 3"<CR>'';
+      key = "<M-3>";
+      mode = ["n" "v" "t" "i"];
+    }
+    {
+      action  = ''<cmd>64ToggleTerm direction=float name="Terminal 4"<CR>'';
+      key = "<M-4>";
+      mode = ["n" "v" "t" "i"];
+    }
+    {
+      action  = ''<cmd>65ToggleTerm direction=float name="Terminal 5"<CR>'';
+      key = "<M-5>";
+      mode = ["n" "v" "t" "i"];
+    }
     {
       action  = "<cmd>Telescope live_grep<CR>";
       key = "<leader>ft";
