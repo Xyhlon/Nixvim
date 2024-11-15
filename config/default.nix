@@ -182,6 +182,7 @@ in
     copilot-cmp.enable = true;
     copilot-chat.enable = true;
     gitsigns.enable = true;
+    gitblame.enable = true;
     lint = {
       enable = true;
       lintersByFt = {
@@ -261,6 +262,10 @@ in
     {
       action  = "<cmd>LazyGit<CR>";
       key = "<leader>gg";
+    }
+    {
+      action  = "<cmd>GitBlameToggle<CR>";
+      key = "<leader>gl";
     }
     {
       key = "f";
