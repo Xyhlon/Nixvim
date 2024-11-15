@@ -72,10 +72,10 @@ in
             name = "luasnip";
             priority = 750;
           }
-          # {
-          #   name = "codeium";
-          #   priority = 600;
-          # }
+          {
+            name = "codeium";
+            priority = 600;
+          }
           {
             name = "buffer";
             priority = 500;
@@ -162,6 +162,7 @@ in
     cmp-cmdline = {
       enable = true;
     }; # autocomplete for cmdline
+    codeium-nvim.enable = true;
     friendly-snippets.enable = true;
     comment.enable = true;
     which-key.enable = true;
