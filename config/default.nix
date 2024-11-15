@@ -27,6 +27,7 @@ in
         nil_ls.enable = true;
         # rnix_ls.enable = true;
         rust-analyzer.enable = true;
+        ruff.enable = true;
         clangd.enable = true;
         typst_lsp.enable = true;
       };
