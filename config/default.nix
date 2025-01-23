@@ -1,23 +1,26 @@
-{self, pkgs, ...}: 
-let
-  get_bufnrs.__raw = #Lua
-  ''
-    function()
-      local buf_size_limit = 1024 * 1024 -- 1MB size limit
-      local bufs = vim.api.nvim_list_bufs()
-      local valid_bufs = {}
-      for _, buf in ipairs(bufs) do
-        if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf)) < buf_size_limit then
-          table.insert(valid_bufs, buf)
-        end
-      end
-      return valid_bufs
-    end
-  '';
-in
 {
+  self,
+  pkgs,
+  ...
+}: let
+  get_bufnrs.__raw =
+    #Lua
+    ''
+      function()
+        local buf_size_limit = 1024 * 1024 -- 1MB size limit
+        local bufs = vim.api.nvim_list_bufs()
+        local valid_bufs = {}
+        for _, buf in ipairs(bufs) do
+          if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf)) < buf_size_limit then
+            table.insert(valid_bufs, buf)
+          end
+        end
+        return valid_bufs
+      end
+    '';
+in {
   # Import all your configuration modules here
-  imports = [ ./bufferline.nix ];
+  imports = [./bufferline.nix];
   plugins = {
     lualine.enable = true;
     lsp = {
@@ -26,10 +29,14 @@ in
         lua_ls.enable = true;
         nil_ls.enable = true;
         # rnix_ls.enable = true;
-        rust-analyzer.enable = true;
+        rust_analyzer = {
+          enable = true;
+          installCargo = true;
+          installRustc = true;
+        };
         ruff.enable = true;
         clangd.enable = true;
-        typst_lsp.enable = true;
+        tinymist.enable = true;
       };
     };
     cmp = {
@@ -58,7 +65,7 @@ in
               inherit get_bufnrs;
             };
           }
-          { 
+          {
             name = "copilot";
             priority = 900;
           }
@@ -103,18 +110,21 @@ in
 
         # };
         window = {
-          completion.__raw = #Lua
-          ''cmp.config.window.bordered()'';
-          documentation.__raw = #Lua
-          ''cmp.config.window.bordered()'';
+          completion.__raw =
+            #Lua
+            ''cmp.config.window.bordered()'';
+          documentation.__raw =
+            #Lua
+            ''cmp.config.window.bordered()'';
         };
         snippet = {
-          expand = #Lua
-          ''
-            function(args)
-              require('luasnip').lsp_expand(args.body)
-            end
-          '';
+          expand =
+            #Lua
+            ''
+              function(args)
+                require('luasnip').lsp_expand(args.body)
+              end
+            '';
         };
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item()";
@@ -167,7 +177,13 @@ in
     friendly-snippets.enable = true;
     comment.enable = true;
     which-key.enable = true;
-    nvim-tree.enable = true;
+    nvim-tree = {
+      enable = true;
+      git = {
+        enable = true;
+        ignore = false;
+      };
+    };
     luasnip.enable = true;
     treesitter.enable = true;
     telescope.enable = true;
@@ -186,14 +202,14 @@ in
     lint = {
       enable = true;
       lintersByFt = {
-        c = [ "cpplint" "sonarlint-language-server"];
-        cpp = [ "cpplint" "sonarlint-language-server"];
-        go = [ "golangci-lint" ];
-        nix = [ "statix" ];
-        lua = [ "selene" ];
-        python = [ "ruff" ];
-        haskell = [ "hlint" ];
-        bash = [ "shellcheck" ];
+        c = ["cpplint" "sonarlint-language-server"];
+        cpp = ["cpplint" "sonarlint-language-server"];
+        go = ["golangci-lint"];
+        nix = ["statix"];
+        lua = ["selene"];
+        python = ["ruff"];
+        haskell = ["hlint"];
+        bash = ["shellcheck"];
       };
     };
     hop.enable = true;
@@ -211,114 +227,118 @@ in
 
   keymaps = [
     {
-      action  = ''<cmd>61ToggleTerm direction=float name="Terminal 1"<CR>'';
+      action = ''<cmd>61ToggleTerm direction=float name="Terminal 1"<CR>'';
       key = "<M-1>";
       mode = ["n" "v" "t" "i"];
     }
     {
-      action  = ''<cmd>62ToggleTerm direction=float name="Terminal 2"<CR>'';
+      action = ''<cmd>62ToggleTerm direction=float name="Terminal 2"<CR>'';
       key = "<M-2>";
       mode = ["n" "v" "t" "i"];
     }
     {
-      action  = ''<cmd>63ToggleTerm direction=float name="Terminal 3"<CR>'';
+      action = ''<cmd>63ToggleTerm direction=float name="Terminal 3"<CR>'';
       key = "<M-3>";
       mode = ["n" "v" "t" "i"];
     }
     {
-      action  = ''<cmd>64ToggleTerm direction=float name="Terminal 4"<CR>'';
+      action = ''<cmd>64ToggleTerm direction=float name="Terminal 4"<CR>'';
       key = "<M-4>";
       mode = ["n" "v" "t" "i"];
     }
     {
-      action  = ''<cmd>65ToggleTerm direction=float name="Terminal 5"<CR>'';
+      action = ''<cmd>65ToggleTerm direction=float name="Terminal 5"<CR>'';
       key = "<M-5>";
       mode = ["n" "v" "t" "i"];
     }
     {
-      action  = "<cmd>Telescope live_grep<CR>";
+      action = "<cmd>Telescope live_grep<CR>";
       key = "<leader>ft";
     }
     {
-     action = "<cmd>NvimTreeToggle<CR>";
-     key = "<leader>e";
+      action = "<cmd>NvimTreeToggle<CR>";
+      key = "<leader>e";
     }
     {
-     action = "<cmd>w<CR>";
-     key = "<leader>w";
+      action = "<cmd>w<CR>";
+      key = "<leader>w";
     }
     {
-     action = "<cmd>q<CR>";
-     key = "<leader>q";
+      action = "<cmd>q<CR>";
+      key = "<leader>q";
     }
     {
-      action  = "<cmd>Telescope man_pages<CR>";
+      action = "<cmd>Telescope man_pages<CR>";
       key = "<leader>sm";
     }
     {
-      action  = "<cmd>Telescope buffers<CR>";
+      action = "<cmd>Telescope buffers<CR>";
       key = "<leader>bf";
     }
     {
-      action  = "<cmd>LazyGit<CR>";
+      action = "<cmd>LazyGit<CR>";
       key = "<leader>gg";
     }
     {
-      action  = "<cmd>GitBlameToggle<CR>";
+      action = "<cmd>GitBlameToggle<CR>";
       key = "<leader>gl";
     }
     {
       key = "f";
-      action.__raw = #Lua
-      ''
-        function()
-          require'hop'.hint_char1({
-            direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
-            current_line_only = true
-          })
-        end
-      '';
+      action.__raw =
+        #Lua
+        ''
+          function()
+            require'hop'.hint_char1({
+              direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
+              current_line_only = true
+            })
+          end
+        '';
       options.remap = true;
     }
     {
       key = "F";
-      action.__raw = #Lua
-      ''
-        function()
-          require'hop'.hint_char1({
-            direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
-            current_line_only = true
-          })
-        end
-      '';
+      action.__raw =
+        #Lua
+        ''
+          function()
+            require'hop'.hint_char1({
+              direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
+              current_line_only = true
+            })
+          end
+        '';
       options.remap = true;
     }
     {
       key = "t";
-      action.__raw = #Lua
-      ''
-        function()
-          require'hop'.hint_char1({
-            direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
-            current_line_only = true,
-            hint_offset = -1
-          })
-        end
-      '';
+      action.__raw =
+        #Lua
+        ''
+          function()
+            require'hop'.hint_char1({
+              direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
+              current_line_only = true,
+              hint_offset = -1
+            })
+          end
+        '';
       options.remap = true;
     }
     {
       key = "T";
-      action.__raw = #Lua
-      ''
-        function()
-          require'hop'.hint_char1({
-            direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
-            current_line_only = true,
-            hint_offset = 1
-          })
-        end
-      '';
+      action.__raw =
+        #Lua
+        ''
+          function()
+            require'hop'.hint_char1({
+              direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
+              current_line_only = true,
+              hint_offset = 1
+            })
+          end
+        '';
       options.remap = true;
     }
   ];
