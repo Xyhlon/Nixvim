@@ -253,7 +253,7 @@ in {
     }
     {
       action = "<cmd>Telescope live_grep<CR>";
-      key = "<leader>ft";
+      key = "<leader>st";
     }
     {
       action = "<cmd>NvimTreeToggle<CR>";
@@ -268,8 +268,12 @@ in {
       key = "<leader>q";
     }
     {
-      action = "<cmd>Telescope man_pages<CR>";
+      action = "<cmd>Telescope man_pages sections=ALL<CR>";
       key = "<leader>sm";
+    }
+    {
+      action = "<cmd>Telescope help_tags<CR>";
+      key = "<leader>sh";
     }
     {
       action = "<cmd>Telescope buffers<CR>";
