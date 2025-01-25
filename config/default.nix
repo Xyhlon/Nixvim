@@ -202,8 +202,8 @@ in {
     lint = {
       enable = true;
       lintersByFt = {
-        c = ["cpplint" "sonarlint-language-server"];
-        cpp = ["cpplint" "sonarlint-language-server"];
+        c = ["cpplint"];
+        cpp = ["cpplint"];
         go = ["golangci-lint"];
         nix = ["statix"];
         lua = ["selene"];
@@ -352,4 +352,5 @@ in {
   colorschemes.gruvbox.enable = true;
 
   clipboard.providers.wl-copy.enable = true;
+  clipboard.register = "unnamedplus";
 }
