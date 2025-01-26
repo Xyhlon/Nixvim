@@ -186,7 +186,10 @@ in {
     };
     luasnip.enable = true;
     treesitter.enable = true;
-    telescope.enable = true;
+    telescope = {
+      enable = true;
+      extensions.live-grep-args.enable = true;
+    };
     clangd-extensions.enable = true;
     lazygit.enable = true;
     plantuml-syntax.enable = true;
