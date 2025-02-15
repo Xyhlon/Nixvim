@@ -351,9 +351,8 @@ in {
   ];
 
   extraPlugins = with pkgs.vimPlugins; [
-    {
-      plugin = lazydev-nvim;
-    }
+    lazydev-nvim
+    typst-preview-nvim
   ];
 
   colorschemes.gruvbox.enable = true;
