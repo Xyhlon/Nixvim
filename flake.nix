@@ -51,6 +51,11 @@
           # Lets you run `nix run .` to start nixvim
           default = nvim;
         };
+        devShells.default = nixpkgs.legacyPackages.${system}.mkShell {
+          packages = [
+            pkgs.statix
+          ];
+        };
 
         formatter = nixpkgs.legacyPackages.${system}.alejandra;
       };
