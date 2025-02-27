@@ -38,6 +38,18 @@ in {
         clangd.enable = true;
         tinymist.enable = true;
       };
+      keymaps.diagnostic = {
+        "<leader>j" = "goto_next";
+        "<leader>k" = "goto_prev";
+      };
+      keymaps.lspBuf = {
+        K = "hover";
+        gD = "references";
+        gd = "definition";
+        gi = "implementation";
+        gt = "type_definition";
+        "<leader>lr" = "rename";
+      };
     };
     cmp = {
       enable = true;
