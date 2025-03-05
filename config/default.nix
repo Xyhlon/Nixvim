@@ -225,6 +225,7 @@ in {
         python = ["ruff"];
         haskell = ["hlint"];
         bash = ["shellcheck"];
+        rust = ["clippy"];
       };
     };
     hop.enable = true;
