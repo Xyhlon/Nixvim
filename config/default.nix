@@ -222,9 +222,11 @@ in {
         go = ["golangci-lint"];
         nix = ["statix"];
         lua = ["selene"];
-        python = ["ruff"];
+        python = ["ruff" "bandit"];
         haskell = ["hlint"];
         bash = ["shellcheck"];
+        md = ["markdownlint" "cspell" "languagetool"];
+        rust = ["clippy"];
       };
     };
     hop.enable = true;
