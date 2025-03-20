@@ -31,6 +31,12 @@ in {
         ruff.enable = true;
         clangd.enable = true;
         tinymist.enable = true;
+        rust_analyzer = {
+          enable = true;
+          installCargo = false;
+          installRustc = false;
+          installRustfmt = false;
+        };
       };
       keymaps.diagnostic = {
         "<leader>j" = "goto_next";
@@ -224,32 +230,32 @@ in {
     hop.enable = true;
     toggleterm.enable = true;
     lsp-status.enable = true;
-    rustaceanvim = {
-      enable = true;
-      settings = {
-        server = {
-          dap.adapters.lldb = {
-            type = "server";
-            port = "${''$''}{port}";
-            executable = {
-              command = "codelldb";
-              args = ["--port" "${''$''}{port}"];
-            };
-          };
-        };
-        tools.enable_clippy = true;
-        server = {
-          default_settings = {
-            inlayHints = {lifetimeElisionHints = {enable = "always";};};
-            rust-analyzer = {
-              cargo = {allFeatures = true;};
-              check = {command = "clippy";};
-              files = {excludeDirs = ["target" ".git" ".cargo" ".github" ".direnv"];};
-            };
-          };
-        };
-      };
-    };
+    # rustaceanvim = {
+    #   enable = true;
+    #   settings = {
+    #     server = {
+    #       dap.adapters.lldb = {
+    #         type = "server";
+    #         port = "${''$''}{port}";
+    #         executable = {
+    #           command = "codelldb";
+    #           args = ["--port" "${''$''}{port}"];
+    #         };
+    #       };
+    #     };
+    #     tools.enable_clippy = true;
+    #     server = {
+    #       default_settings = {
+    #         inlayHints = {lifetimeElisionHints = {enable = "always";};};
+    #         rust-analyzer = {
+    #           cargo = {allFeatures = true;};
+    #           check = {command = "clippy";};
+    #           files = {excludeDirs = ["target" ".git" ".cargo" ".github" ".direnv"];};
+    #         };
+    #       };
+    #     };
+    #   };
+    # };
   };
 
   opts = {
