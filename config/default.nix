@@ -37,6 +37,9 @@ in {
           installRustc = false;
           installRustfmt = false;
         };
+        ltex = {
+          enable = true;
+        };
       };
       keymaps.diagnostic = {
         "<leader>j" = "goto_next";
