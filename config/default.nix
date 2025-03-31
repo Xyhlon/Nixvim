@@ -52,6 +52,7 @@ in {
         gi = "implementation";
         gt = "type_definition";
         "<leader>lr" = "rename";
+        "<leader>la" = "code_action";
       };
     };
     ltex-extra.enable = true;
