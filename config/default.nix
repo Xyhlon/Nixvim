@@ -55,7 +55,16 @@ in {
         "<leader>la" = "code_action";
       };
     };
-    ltex-extra.enable = true;
+    ltex-extra = {
+      enable = true;
+      settings = {
+        path = ".vscode";
+        loadLangs = [
+          "en-US"
+          "de-AT"
+        ];
+      };
+    };
     cmp = {
       enable = true;
       settings = {
