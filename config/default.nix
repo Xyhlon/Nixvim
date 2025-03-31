@@ -54,6 +54,7 @@ in {
         "<leader>lr" = "rename";
       };
     };
+    ltex-extra.enable = true;
     cmp = {
       enable = true;
       settings = {
