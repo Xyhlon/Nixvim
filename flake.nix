@@ -54,6 +54,7 @@
         devShells.default = nixpkgs.legacyPackages.${system}.mkShell {
           packages = [
             pkgs.statix
+            pkgs.selene
           ];
         };
 
