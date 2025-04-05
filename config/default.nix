@@ -6,6 +6,7 @@
   # Import all your configuration modules here
   imports = [
     ./keymaps.nix
+    ./debug.nix
     ./lsp.nix
     ./bufferline.nix
     ./completion.nix
@@ -41,6 +42,7 @@
     gitblame.enable = true;
     hop.enable = true;
     toggleterm.enable = true;
+    lazydev.enable = true;
   };
 
   opts = {
@@ -52,7 +54,6 @@
   globals.mapleader = " ";
 
   extraPlugins = with pkgs.vimPlugins; [
-    lazydev-nvim
     typst-preview-nvim
   ];
 

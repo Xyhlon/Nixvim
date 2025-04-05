@@ -9,69 +9,93 @@
       	"%f[%w](%S+[%!%?])[ \t]+%f[%u]"       -- words ending with '!' or '?' followed by whitespace and uppercase
       }
 
-      -- Function to collect all end positions where a newline should be added.
+      -- Function to collect end positions (within a single line)
       local function getAllEndPositions(text, patterns)
-      	local endPositions = {}
-      	for _, pattern in ipairs(patterns) do
-      		local startPos = 1
-      		while true do
-      			local s, e = string.find(text, pattern, startPos)
-      			if s then
-      				table.insert(endPositions, e)
-      				startPos = e + 1
-      			else
-      				break
-      			end
-      		end
-      	end
-      	return endPositions
+       local endPositions = {}
+       for _, pattern in ipairs(patterns) do
+        local startPos = 1
+        while true do
+         local s, e = string.find(text, pattern, startPos)
+         if s then
+          table.insert(endPositions, e)
+          startPos = e + 1
+         else
+          break
+         end
+        end
+       end
+       return endPositions
       end
 
       -- Helper function to wrap a single line so that its length does not exceed 'width' characters.
       local function wrap_line(line, width)
-      	local wrapped = {}
-      	while #line > width do
-      		-- Try to break at the last whitespace in the first 'width' characters.
-      		local breakpoint = line:sub(1, width):match(".*()%s")
-      		if not breakpoint or breakpoint < width * 0.5 then
-      			-- If no suitable breakpoint, force a break at 'width'
-      			breakpoint = width
-      		end
-      		table.insert(wrapped, line:sub(1, breakpoint))
-      		-- Remove the wrapped part and trim leading whitespace.
-      		line = line:sub(breakpoint + 1):gsub("^%s+", "")
-      	end
-      	table.insert(wrapped, line)
-      	return table.concat(wrapped, "\n")
+       local wrapped = {}
+       while #line > width do
+        -- Find the last whitespace within the first 'width' characters.
+        local breakpoint = line:sub(1, width):match(".*()%s")
+        if not breakpoint or breakpoint < width * 0.5 then
+         breakpoint = width -- force break if no good breakpoint is found
+        end
+        table.insert(wrapped, line:sub(1, breakpoint))
+        line = line:sub(breakpoint + 1):gsub("^%s+", "")
+       end
+       table.insert(wrapped, line)
+       return table.concat(wrapped, "\n")
       end
 
-      -- Main function to format a block of text:
-      --   1. Insert newlines after sentence endings.
-      --   2. Wrap each resulting line to a maximum width (default 80 characters).
-      function format_text(text, max_width)
-      	max_width = max_width or 80
+      -- Helper function to split text into lines (preserving empty lines)
+      local function split_lines(text)
+       local lines = {}
+       local pos = 1
+       while true do
+        local next_newline = text:find("\n", pos, true)
+        if next_newline then
+         table.insert(lines, text:sub(pos, next_newline - 1))
+         pos = next_newline + 1
+        else
+         table.insert(lines, text:sub(pos))
+         break
+        end
+       end
+       return lines
+      end
 
-      	-- Insert newline at sentence boundaries.
-      	local positions = getAllEndPositions(text, new_line_patterns)
-      	table.sort(positions)
-      	local segments = {}
-      	local last_index = 1
-      	for _, pos in ipairs(positions) do
-      		table.insert(segments, text:sub(last_index, pos))
-      		last_index = pos + 1
-      	end
-      	if last_index <= #text then
-      		table.insert(segments, text:sub(last_index))
-      	end
-      	local with_newlines = table.concat(segments, "\n")
+      -- Updated format_text() that respects existing newlines.
+      local function format_text(text, max_width)
+       max_width = max_width or 80
+       local output_lines = {}
+       local lines = split_lines(text) -- preserve existing line breaks
 
-      	-- Wrap each line so that no line is longer than max_width.
-      	local wrapped_lines = {}
-      	for line in with_newlines:gmatch("[^\n]+") do
-      		table.insert(wrapped_lines, wrap_line(line, max_width))
-      	end
+       for _, line in ipairs(lines) do
+        -- Preserve empty lines exactly.
+        if line == "" then
+         table.insert(output_lines, line)
+        else
+         -- Find sentence boundaries within this line.
+         local positions = getAllEndPositions(line, new_line_patterns)
+         table.sort(positions)
+         local segments = {}
+         local last_index = 1
+         for _, pos in ipairs(positions) do
+          table.insert(segments, line:sub(last_index, pos))
+          last_index = pos + 1
+         end
+         if last_index <= #line then
+          table.insert(segments, line:sub(last_index))
+         end
 
-      	return table.concat(wrapped_lines, "\n")
+         -- Process each segment separately.
+         for _, seg in ipairs(segments) do
+          local wrapped = wrap_line(seg, max_width)
+          -- If wrapping produces multiple lines, add each one.
+          for s in wrapped:gmatch("[^\n]+") do
+           table.insert(output_lines, s)
+          end
+         end
+        end
+       end
+
+       return table.concat(output_lines, "\n")
       end
 
       --------------------------------------------------------------------------------

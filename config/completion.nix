@@ -47,6 +47,13 @@ in {
             priority = 900;
           }
           {
+            name = "lazydev";
+            priority = 1100;
+            option = {
+              inherit get_bufnrs;
+            };
+          }
+          {
             name = "treesitter";
             priority = 850;
             option = {
