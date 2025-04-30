@@ -6,6 +6,7 @@
         lua_ls.enable = true;
         nil_ls.enable = true;
         ruff.enable = true;
+        pyright.enable = true;
         clangd.enable = true;
         tinymist.enable = true;
         rust_analyzer = {
