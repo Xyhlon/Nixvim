@@ -8,7 +8,10 @@
         ruff.enable = true;
         pyright.enable = true;
         clangd.enable = true;
-        tinymist.enable = true;
+        tinymist = {
+	enable = true;
+	package = null;
+	};
         rust_analyzer = {
           enable = true;
           installCargo = false;

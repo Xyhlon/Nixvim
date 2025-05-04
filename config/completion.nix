@@ -126,6 +126,6 @@ in {
     # ai completion
     copilot-cmp.enable = true;
     copilot-chat.enable = true;
-    codeium-nvim.enable = true;
+    # windsurf-nvim.enable = true;
   };
 }
