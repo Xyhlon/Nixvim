@@ -65,10 +65,6 @@ in {
             priority = 750;
           }
           {
-            name = "codeium";
-            priority = 600;
-          }
-          {
             name = "buffer";
             priority = 500;
             option = {
