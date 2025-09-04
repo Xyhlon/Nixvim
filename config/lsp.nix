@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   plugins = {
     lsp = {
       enable = true;
@@ -9,9 +10,9 @@
         pyright.enable = true;
         clangd.enable = true;
         tinymist = {
-	enable = true;
-	package = null;
-	};
+          enable = true;
+          package = null;
+        };
         rust_analyzer = {
           enable = true;
           installCargo = false;
@@ -53,10 +54,10 @@
     clangd-extensions.enable = true;
     lspkind = {
       enable = true;
-      symbolMap = {
-        Copilot = "";
-      };
-      extraOptions = {
+      settings = {
+        symbol_map = {
+          Copilot = "";
+        };
         maxwidth = 50;
         ellipsis_char = "...";
       };

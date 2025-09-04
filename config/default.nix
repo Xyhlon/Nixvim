@@ -2,7 +2,8 @@
   self,
   pkgs,
   ...
-}: {
+}:
+{
   # Import all your configuration modules here
   imports = [
     ./keymaps.nix
@@ -21,9 +22,11 @@
     which-key.enable = true;
     nvim-tree = {
       enable = true;
-      git = {
-        enable = true;
-        ignore = false;
+      settings = {
+        git = {
+          enable = true;
+          ignore = false;
+        };
       };
     };
     treesitter.enable = true;
@@ -49,6 +52,13 @@
     number = true;
     relativenumber = true;
     shiftwidth = 2;
+  };
+
+  filetype.extension = {
+    sage = "python";
+    pyx = "python";
+    spyx = "python";
+    py = "python";
   };
 
   globals.mapleader = " ";
