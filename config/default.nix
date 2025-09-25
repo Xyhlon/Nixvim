@@ -2,8 +2,7 @@
   self,
   pkgs,
   ...
-}:
-{
+}: {
   # Import all your configuration modules here
   imports = [
     ./keymaps.nix
@@ -15,6 +14,10 @@
     ./plaintext_format.nix
   ];
   plugins = {
+    aw-watcher = {
+      enable = true;
+      autoLoad = true;
+    };
     lualine.enable = true;
     wilder.enable = true;
     wtf.enable = true;
