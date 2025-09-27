@@ -14,10 +14,10 @@
     ./plaintext_format.nix
   ];
   plugins = {
-    aw-watcher = {
-      enable = true;
-      autoLoad = true;
-    };
+    # aw-watcher = {
+    #   enable = true;
+    #   autoLoad = true;
+    # };
     lualine.enable = true;
     wilder.enable = true;
     wtf.enable = true;
