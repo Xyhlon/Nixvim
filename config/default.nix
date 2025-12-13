@@ -13,12 +13,19 @@
     ./lint.nix
     ./plaintext_format.nix
   ];
+  dependencies.lean = {
+    enable = true;
+    package = pkgs.elan;
+  };
   plugins = {
     # aw-watcher = {
     #   enable = true;
     #   autoLoad = true;
     # };
-    lean.enable = true;
+    lean = {
+      enable = true;
+      # package = pkgs.vimPlugins.lean-nvim;
+    };
     lualine.enable = true;
     wilder.enable = true;
     wtf.enable = true;
