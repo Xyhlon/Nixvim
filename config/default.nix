@@ -18,6 +18,7 @@
     #   enable = true;
     #   autoLoad = true;
     # };
+    lean.enable = true;
     lualine.enable = true;
     wilder.enable = true;
     wtf.enable = true;
