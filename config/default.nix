@@ -82,4 +82,13 @@
 
   clipboard.providers.wl-copy.enable = true;
   clipboard.register = "unnamedplus";
+
+  extraConfigLua =
+    /*
+    lua
+    */
+    ''
+      -- There might be a better way to do it
+      vim.cmd("packadd! termdebug");
+    '';
 }
