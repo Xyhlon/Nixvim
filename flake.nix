@@ -55,6 +55,7 @@
           packages = [
             pkgs.statix
             pkgs.selene
+            pkgs.alejandra
           ];
         };
 

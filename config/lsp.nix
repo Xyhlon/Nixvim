@@ -4,7 +4,17 @@
       enable = true;
       servers = {
         lua_ls.enable = true;
-        nil_ls.enable = true;
+        nil_ls = {
+          enable = true;
+          settings = {
+            formatting = {
+              command = [
+                "nix"
+                "fmt"
+              ];
+            };
+          };
+        };
         ruff.enable = true;
         pyright.enable = true;
         clangd.enable = true;
