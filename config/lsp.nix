@@ -28,7 +28,7 @@
           installRustc = false;
           installRustfmt = false;
         };
-        ltex = {
+        harper_ls = {
           enable = true;
           filetypes = [
             "bibtex"
