@@ -18,6 +18,13 @@
         ruff.enable = true;
         pyright.enable = true;
         clangd.enable = true;
+        julials = {
+          enable = true;
+          package = null;
+          filetypes = [
+            "julia"
+          ];
+        };
         tinymist = {
           enable = true;
           package = null;
