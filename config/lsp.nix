@@ -20,31 +20,18 @@
         clangd.enable = true;
         julials = {
           enable = true;
-          package = null;
-          filetypes = [
-            "julia"
-          ];
-          rootMarkers = [
-            "Project.toml"
-            "Manifest.toml"
-          ];
           cmd = [
             "julia"
+            "--project=@julials"
             "--startup-file=no"
             "--history-file=no"
-            "-e"
-            ''
-              using LanguageServer;
-              using Pkg;
-              import StaticLint;
-              import SymbolServer;
-              env_path = dirname(Pkg.Types.Context().env.project_file);
-
-              server = LanguageServer.LanguageServerInstance(stdin, stdout, env_path, "");
-              server.runlinter = true;
-              run(server);
-            ''
+            "${./julia/julia_language_server.jl}"
           ];
+          filetypes = ["julia"];
+          package = null;
+          rootMarkers = ["JuliaProject.toml" "Project.toml" "Manifest.toml"];
+          autostart = true;
+          settings.single_file_support = true;
         };
         tinymist = {
           enable = true;
