@@ -74,7 +74,21 @@
       };
     };
     lsp-format.enable = true;
-    lsp-status.enable = true;
+    lsp-status = {
+      enable = true;
+      settings = {
+        spinner_frames = [
+          "⣾"
+          "⣽"
+          "⣻"
+          "⢿"
+          "⡿"
+          "⣟"
+          "⣯"
+          "⣷"
+        ];
+      };
+    };
     clangd-extensions.enable = true;
     lspkind = {
       enable = true;
