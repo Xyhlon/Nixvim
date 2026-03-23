@@ -11,16 +11,13 @@
     ./completion.nix
     ./lint.nix
     ./plaintext_format.nix
+    ./aw-watcher
   ];
   dependencies.lean = {
     enable = true;
     package = pkgs.elan;
   };
   plugins = {
-    # aw-watcher = {
-    #   enable = true;
-    #   autoLoad = true;
-    # };
     lean = {
       enable = true;
       # package = pkgs.vimPlugins.lean-nvim;
