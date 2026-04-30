@@ -76,7 +76,8 @@
 
   colorschemes.gruvbox.enable = true;
 
-  clipboard.providers.wl-copy.enable = true;
+  clipboard.providers.wl-copy.enable = pkgs.stdenv.isLinux;
+  clipboard.providers.pbcopy.enable = pkgs.stdenv.isDarwin;
   clipboard.register = "unnamedplus";
 
   extraConfigLua =
