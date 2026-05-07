@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Import all your configuration modules here
   imports = [
     ./keymaps.nix
@@ -26,6 +23,7 @@
     wilder.enable = true;
     wtf.enable = true;
     comment.enable = true;
+    image.enable = true;
     which-key.enable = true;
     nvim-tree = {
       enable = true;
@@ -79,6 +77,9 @@
   clipboard.providers.wl-copy.enable = pkgs.stdenv.isLinux;
   clipboard.providers.pbcopy.enable = pkgs.stdenv.isDarwin;
   clipboard.register = "unnamedplus";
+
+  extraPackages = [ pkgs.imagemagick pkgs.fd pkgs.ripgrep pkgs.ueberzugpp];
+  extraLuaPackages = ps: [ ps.magick ];
 
   extraConfigLua =
     /*
