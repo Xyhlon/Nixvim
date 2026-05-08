@@ -156,7 +156,6 @@
   clipboard.register = "unnamedplus";
 
   extraPackages = [pkgs.imagemagick pkgs.fd pkgs.ripgrep pkgs.ueberzugpp];
-  extraLuaPackages = ps: [ps.magick];
 
   extraConfigLua =
     /*
