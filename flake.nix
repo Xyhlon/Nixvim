@@ -43,12 +43,24 @@
             # inherit (inputs) foo;
           };
         };
+        checkModule = {
+          inherit pkgs;
+          module = {lib, ...}: {
+            imports = [
+              (import ./config)
+            ];
+
+            # image.nvim needs a real terminal, so do not load it in nix flake check.
+            plugins.image.enable = lib.mkForce false;
+          };
+          extraSpecialArgs = {};
+        };
         nvim = nixvim'.makeNixvimWithModule nixvimModule;
       in {
         _module.args.pkgs = pkgs;
         checks = {
           # Run `nix flake check .` to verify that your config is not broken
-          default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
+          default = nixvimLib.check.mkTestDerivationFromNixvimModule checkModule;
         };
 
         packages = {
