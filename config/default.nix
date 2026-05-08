@@ -10,7 +10,6 @@
     ./plaintext_format.nix
     ./aw-watcher
   ];
-  nixpkgs.config.allowUnfree = true;
   dependencies.lean = {
     enable = true;
     package = pkgs.elan;

@@ -95,7 +95,11 @@
           ...
         }: {
           imports = [inputs.nixvim.homeModules.nixvim];
-          programs.nixvim = import ./config/default.nix {inherit pkgs lib config;};
+          programs.nixvim =
+            (import ./config/default.nix {inherit pkgs lib config;})
+            // {
+              nixpkgs.config.allowUnfree = true;
+            };
         };
 
         darwinModules.default = {
