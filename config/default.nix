@@ -27,11 +27,6 @@
       enable = true;
 
       package = pkgs.vimPlugins.image-nvim.overrideAttrs (old: {
-        nativeBuildInputs =
-          (old.nativeBuildInputs or [])
-          ++ [
-            pkgs.python3
-          ];
         postPatch =
           (old.postPatch or "")
           + ''
