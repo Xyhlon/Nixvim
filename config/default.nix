@@ -94,6 +94,9 @@
       settings = {
         debug.enabled = true;
         window_overlap_clear_enabled = true;
+        tmux_show_only_in_active_window = true;
+        window_overlap_clear_ft_ignore = ["cmp_menu" "cmp_docs" "snacks_notif" "scrollview" "scrollview_sign"];
+        editor_only_render_when_focused = true;
       };
     };
     which-key.enable = true;
