@@ -72,7 +72,7 @@
               avif = true,
               heic = true,
               bmp = true,
-              svg = true,
+              svg = false,
             }
 
             local active_image = nil
