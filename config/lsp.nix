@@ -36,6 +36,9 @@
         tinymist = {
           enable = true;
           package = null;
+          settings = {
+            formatterMode = "disable";
+          };
         };
         rust_analyzer = {
           enable = true;
