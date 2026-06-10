@@ -27,12 +27,12 @@
       enable = true;
       package = pkgs.vimUtils.buildVimPlugin {
         pname = "image.nvim";
-        version = "unstable-2026-05-12";
+        version = "main";
         src = pkgs.fetchFromGitHub {
           owner = "3rd";
           repo = "image.nvim";
-          rev = "73a64613048216bda1a4f464bf7bed2dbaaf4cec";
-          hash = "sha256-kPLEY2Yjkzp8TqeKI546v8J4crhzD7VWBtSlnZ0DXOQ=";
+          rev = "44e07129cd0ea0c60afa7a1991d35b5765b51a6b";
+          hash = "sha256-pO/Re5wA0WYVxSZ3PgF47+jV7PgkcgULiTk6mZEUeys=";
         };
         nvimSkipModules = [
           "minimal-setup"
